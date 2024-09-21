@@ -1,0 +1,322 @@
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^ HEADER ^^^^^^^^^^^^^^^^^^^^^^^ -->
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^ HEADER ^^^^^^^^^^^^^^^^^^^^^^^ -->
+
+<%- include('./common/header.ejs')%>
+
+    <!-- ^^^^^^^^^^^^^^^^^^^^^^^ HEADER ^^^^^^^^^^^^^^^^^^^^^^^ -->
+    <!-- ^^^^^^^^^^^^^^^^^^^^^^^ HEADER ^^^^^^^^^^^^^^^^^^^^^^^ -->
+
+    <style>
+      body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #343a40;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-title {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+        .card-text {
+            color: #6c757d;
+        }
+    </style>
+
+    <!-- +++++++++++++++++++++++++++++++++ CAROUSEL +++++++++++++++++++++++++++++++++++++++++++  -->
+    <!-- +++++++++++++++++++++++++++++++++ CAROUSEL +++++++++++++++++++++++++++++++++++++++++++  -->
+    <div>
+        <div id="carouselExampleAutoplaying" class="carousel slide navcolor" data-bs-ride="carousel">
+            <div class="carousel-inner ">
+
+                <div class="carousel-item active carouselHeight">
+                    <!-- <img src="" class="d-block w-100 h-100 object-fit-md-cover" alt="..."> -->
+                    <div class="carousel-caption">
+                        <a href="/admission" class="btn joinBtn mb-5 border border-1 border-dark">
+                            Enroll Now
+                        </a>
+                        <h3>Take Admission now</h3>
+                        <p class="fs-5 ">Academic and General Batches</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item carouselHeight">
+                    <!-- <img src="" class="d-block w-100 h-100 object-fit-md-cover" alt="..."> -->
+
+                    <div class="carousel-caption">
+                        <a href="/admission" class="btn joinBtn mb-5 border border-1 border-dark">
+                            Enroll Now
+                        </a>
+                        <h3>Take Admission now</h3>
+                        <p class="fs-5 ">Academic and General Batches</p>
+
+                    </div>
+                </div>
+
+                <div class="carousel-item carouselHeight">
+                    <!-- <img src="" class="d-block w-100 h-100 object-fit-md-cover" alt="..."> -->
+
+                    <div class="carousel-caption">
+                        <a href="/admission" class="btn joinBtn mb-5 border border-1 border-dark">
+                            Enroll Now
+                        </a>
+                        <h3>Take Admission now</h3>
+                        <p class="fs-5 ">Academic and General Batches</p>
+
+                    </div>
+                </div>
+
+                <div class="carousel-item carouselHeight">
+                    <!-- <img src="" class="d-block w-100 h-100 object-fit-md-cover" alt="..."> -->
+
+                    <div class="carousel-caption">
+                        <a href="/admission" class="btn joinBtn mb-5 border border-1 border-dark">
+                            Enroll Now
+                        </a>
+                        <h3>Take Admission now</h3>
+                        <p class="fs-5 ">Academic and General Batches</p>
+                    </div>
+                </div>
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- +++++++++++++++++++++++++++++++++ CAROUSEL +++++++++++++++++++++++++++++++++++++++++++  -->
+    <!-- +++++++++++++++++++++++++++++++++ CAROUSEL +++++++++++++++++++++++++++++++++++++++++++  -->
+
+    <!-- ------------------------- Batch Timing ----------------------------- -->
+    <!-- ------------------------- Batch Timing ----------------------------- -->
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center">Batch Timing</h1>
+            </div>
+            <div class="col-12 d-flex justify-content-center mb-4">
+                <hr class="w-25 border border-black border-5">
+            </div>
+            <div class="row col-md-12">
+            <% if(batchData.length>0){ %>
+                <% for(var i=0; i<batchData.length; i++){ %>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Batch <%= batchData[i].batchNumber %></h5>
+                            <p class="card-text"><strong>Class:</strong> <%= batchData[i].class %></p>
+                            <p class="card-text"><strong>Subject:</strong><%= batchData[i].subject %></p>
+                            <p class="card-text"><strong>Teacher:</strong> <%= batchData[i].teacher %></p>
+                            <p class="card-text"><strong>Time:</strong><%= batchData[i].time %></p>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+                <% } else{ %>
+                    Batch Data not found
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <!-- ------------------------- Batch Timing ----------------------------- -->
+    <!-- ------------------------- Batch Timing ----------------------------- -->
+
+
+    <!-- ============================== TOPPERS COLUMN ================================ -->
+    <!-- ============================== TOPPERS COLUMN ================================ -->
+
+    <div class="container my-5">
+        <div class="row">
+
+            <div class="col-12">
+                <h1 class="text-center">Our Toppers</h1>
+            </div>
+            <div class=" col-12 d-flex justify-content-center mb-4">
+                <hr class="w-25 border border-black border-5">
+            </div>
+
+            <% if(topperData.length>0){ %>
+                <div class=" col-12 d-flex justify-content-center mb-4">
+                    <hr class="w-25 border border-black border-5">
+                </div>
+                <% for(var i=0; i<topperData.length; i++){ %>
+
+                    <div class="col-md-4 mt-2 p-4 toppersColumn d-flex justify-content-center ">
+
+                        <div class="" style="height:50%; margin-top:-22px; border-radius:100px;">
+                            <span class=" p-4 topperLabel">
+                                <%= i+1 %>
+                            </span>
+                            <img src="../uploads/toppers/<%= topperData[i].topperImg%>" alt="topper's Images"
+                                style="height:200px; border-top-left-radius:50%; border-top-right-radius: 50%;"
+                                class="w-100 object-fit-cover object-position-center">
+
+                            <p class="fw-bold fs-5 text-center mt-3">
+                                Name - <%= topperData[i].topperName%>
+                            </p>
+                            <p class="fw-bold fs-5 text-center mt-3">
+                                Class - <%= topperData[i].topperClass %>
+
+                            </p>
+                            <p class="fw-bold fs-5 text-center mt-3">
+                                Marks - <%= topperData[i].topperGrade %>
+                            </p>
+                        </div>
+
+                    </div>
+                    <% } %>
+                        <% } else{ %>
+                            Topper Data not found
+                            <% } %>
+
+        </div>
+    </div>
+
+    <!-- ============================== TOPPERS COLUMN ================================ -->
+    <!-- ============================== TOPPERS COLUMN ================================ -->
+
+
+
+    <!-- ^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_          NOTES COLUMN        _^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^ -->
+    <!-- ^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_          NOTES COLUMN        _^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^ -->
+
+
+    <div class="container my-4">
+        <div class="row">
+
+            <div class="col-12">
+                <h1 class="text-center">Notes</h1>
+            </div>
+
+            <div class=" col-12 d-flex justify-content-center mb-4">
+                <hr class="w-25 border border-black border-5">
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card p-3 mt-3 ">
+
+                    <span class="classSticker">Class 9<sup>th</sup> Notes</span>
+                    <img src="./images/notesSample.png" alt="" class="w-100 notesStyle">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">Class 9<sup>th</sup> </h4>
+
+                        <p class="card-text">
+                            <a href="" class="btn btn-primary">
+                                Social Science
+                            </a>
+                        </p>
+                        <p class="card-text">
+                            <a href="" class="btn btn-primary">
+                                English
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card p-3 mt-3 ">
+                    <span class="classSticker">Class 10<sup>th</sup> Notes</span>
+                    <img src="./images/notesSample.png" alt="" class="w-100 notesStyle">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">Class 10<sup>th</sup> </h4>
+
+                        <p class="card-text">
+                            <a href="" class="btn btn-primary">
+                                Social Science
+                            </a>
+                        </p>
+                        <p class="card-text">
+                            <a href="" class="btn btn-primary">
+                                English
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card p-3 mt-3 ">
+
+                    <span class="classSticker">Class 11<sup>th</sup> Notes</span>
+
+                    <img src="./images/notesSample.png" alt="" class="w-100 notesStyle">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">Class 11<sup>th</sup> </h4>
+
+                        <p class="card-text">
+                            <a href="" class="btn btn-primary">
+                                Humanities
+                            </a>
+                        </p>
+                        <p class="card-text">
+                            <a href="" class="btn btn-primary">
+                                English
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card p-3 mt-3 ">
+                    <span class="classSticker">Class 12<sup>th</sup>Notes</span>
+
+                    <img src="./images/notesSample.png" alt="" class="w-100 notesStyle">
+
+                    <div class="card-body text-center">
+
+                        <h4 class="card-title">Class 12<sup>th</sup> </h4>
+                        <p class="card-text">
+                            <a href="" class="btn btn-primary">
+                                Humanities
+                            </a>
+                        </p>
+                        <p class="card-text">
+                            <a href="" class="btn btn-primary">
+                                English
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                    <!-- ^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_        NOTES COLUMN        _^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^ -->
+                    <!-- ^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_        NOTES COLUMN        _^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^ -->
+
+
+
+
+
+
+                    <!-- ^^^^^^^^^^^^^^^^^^^^^^ FOOTER ^^^^^^^^^^^^^^^^^^^^^^^^ -->
+                    <!-- ^^^^^^^^^^^^^^^^^^^^^^ FOOTER ^^^^^^^^^^^^^^^^^^^^^^^^ -->
+
+                    <%- include('./common/footer.ejs')%>
+
+                        <!-- ^^^^^^^^^^^^^^^^^^^^^^ FOOTER ^^^^^^^^^^^^^^^^^^^^^^^^ -->
+                        <!-- ^^^^^^^^^^^^^^^^^^^^^^ FOOTER ^^^^^^^^^^^^^^^^^^^^^^^^ -->

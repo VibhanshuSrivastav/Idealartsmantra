@@ -1,0 +1,14 @@
+<%- include('../dashboard/dashboardHeader.ejs')%>
+    <div class="container-fluid">
+        <div class="row">
+        
+            <div class="col-md-10">
+                <h1>
+                    <%= enableButton.sName%>
+                </h1>
+                <form method="POST" action="/admin/<%= enableButton._id %>" class="p-3">
+                    <input type="submit" value="Enable" name="enableFeature" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+    </div>

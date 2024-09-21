@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Question</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <%- include('../dashboard/dashboardHeader.ejs')%>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2">
+                    <%- include('../dashboard/left.ejs')%>
+                </div>
+
+                <div class="col-md-10 border border-1">
+                    <h1 class="mb-4">Create a New Question</h1>
+                    <form id="questionForm" method="post" action="/questions">
+                        <div class="form-group">
+                            <label for="class">Class:</label>
+                            <select class="form-control" name="class" id="class" required>
+                                <option value="9th">9th</option>
+                                <option value="10th">10th</option>
+                                <option value="11th">11th</option>
+                                <option value="12th">12th</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject:</label>
+                            <select class="form-control" name="subject" id="subject" required>
+                                <option value="English">English</option>
+                                <option value="SST">SST</option>
+                                <option value="Political">Political</option>
+                                <option value="History">History</option>
+                                <option value="Geography">Geography</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="question">Question:</label>
+                            <input type="text" class="form-control" id="question" name="question" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="optionA">Option A:</label>
+                            <input type="text" class="form-control" id="optionA" name="options[a]" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="optionB">Option B:</label>
+                            <input type="text" class="form-control" id="optionB" name="options[b]" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="optionC">Option C:</label>
+                            <input type="text" class="form-control" id="optionC" name="options[c]" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="optionD">Option D:</label>
+                            <input type="text" class="form-control" id="optionD" name="options[d]" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="correctOption">Correct Option:</label>
+                            <select class="form-control" name="correctOption" id="correctOption" required>
+                                <option value="a">A</option>
+                                <option value="b">B</option>
+                                <option value="c">C</option>
+                                <option value="d">D</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Create Question</button>
+                    </form>
+
+                        <div class="col-md-12 p-0">
+                            <h2 class="my-4">Questions</h2>
+
+                            <div class="form-group">
+                                <label for="filterClass">Filter by Class:</label>
+                                <select class="form-control" id="filterClass" onchange="filterTable()">
+                                    <option value="">All</option>
+                                    <option value="9th">9th</option>
+                                    <option value="10th">10th</option>
+                                    <option value="11th">11th</option>
+                                    <option value="12th">12th</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group my-2">
+                                <label for="filterSubject">Filter by Subject:</label>
+                                <select class="form-control" id="filterSubject" onchange="filterTable()">
+                                    <option value="">All</option>
+                                    <option value="English">English</option>
+                                    <option value="SST">SST</option>
+                                    <option value="Political">Political</option>
+                                    <option value="History">History</option>
+                                    <option value="Geography">Geography</option>
+                                </select>
+                            </div>
+
+                            <% if (questionData.length> 0) { %>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>Class</th>
+                                                <th>Subject</th>
+                                                <th>Question</th>
+                                                <th>Options</th>
+                                                <th>Correct Option</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="questionTableBody">
+                                            <% questionData.forEach(Question=> { %>
+                                                <tr>
+                                                    <td class="question-class">
+                                                        <%= Question.class %>
+                                                    </td>
+                                                    <td class="question-subject">
+                                                        <%= Question.subject %>
+                                                    </td>
+                                                    <td>
+                                                        <%= Question.question %>
+                                                    </td>
+                                                    <td>
+                                                        <ul class="list-unstyled">
+                                                            <li>A: <%= Question.options.a %>
+                                                            </li>
+                                                            <li>B: <%= Question.options.b %>
+                                                            </li>
+                                                            <li>C: <%= Question.options.c %>
+                                                            </li>
+                                                            <li>D: <%= Question.options.d %>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                    <td>
+                                                        <%= Question.correctOption.toUpperCase() %>
+                                                    </td>
+                                                    <td>
+                                                        <form action="/questions/delete/<%= Question._id %>" method="post" style="display:inline;">
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                <% }); %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <% } else { %>
+                                    <div class="alert alert-warning">Question Data not found</div>
+                                    <% } %>
+                        </div>
+                
+
+
+                    <!-- Pagination Controls -->
+                    <nav>
+                        <ul class="pagination justify-content-center" id="paginationControls">
+                            <!-- Pagination items will be inserted here by JavaScript -->
+                        </ul>
+                    </nav>
+                </div>
+
+                <script>
+                    function filterTable() {
+                        const filterClass = document.getElementById('filterClass').value;
+                        const filterSubject = document.getElementById('filterSubject').value;
+                        const rows = document.querySelectorAll('#questionTableBody tr');
+
+                        rows.forEach(row => {
+                            const questionClass = row.querySelector('.question-class').textContent;
+                            const questionSubject = row.querySelector('.question-subject').textContent;
+
+                            const classMatches = !filterClass || questionClass === filterClass;
+                            const subjectMatches = !filterSubject || questionSubject === filterSubject;
+
+                            if (classMatches && subjectMatches) {
+                                row.style.display = "";
+                            } else {
+                                row.style.display = "none";
+                            }
+                        });
+                    }
+
+                    // Pagination functionality
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const rowsPerPage = 5; // Number of rows to display per page
+                        const rows = document.querySelectorAll('#questionTableBody tr');
+                        const paginationControls = document.getElementById('paginationControls');
+                        let currentPage = 1;
+                        let totalPages = Math.ceil(rows.length / rowsPerPage);
+
+                        function displayRows() {
+                            const start = (currentPage - 1) * rowsPerPage;
+                            const end = start + rowsPerPage;
+
+                            rows.forEach((row, index) => {
+                                if (index >= start && index < end) {
+                                    row.style.display = "";
+                                } else {
+                                    row.style.display = "none";
+                                }
+                            });
+                        }
+
+                        function updatePaginationControls() {
+                            paginationControls.innerHTML = '';
+
+                            for (let i = 1; i <= totalPages; i++) {
+                                const li = document.createElement('li');
+                                li.className = 'page-item';
+                                if (i === currentPage) {
+                                    li.classList.add('active');
+                                }
+                                const a = document.createElement('a');
+                                a.className = 'page-link';
+                                a.href = '#';
+                                a.textContent = i;
+                                a.addEventListener('click', function (event) {
+                                    event.preventDefault();
+                                    currentPage = i;
+                                    displayRows();
+                                    updatePaginationControls();
+                                });
+                                li.appendChild(a);
+                                paginationControls.appendChild(li);
+                            }
+                        }
+
+                        // Initial display
+                        displayRows();
+                        updatePaginationControls();
+                    });
+                </script>
+
+            </div>
+        </div>
+
+        <!-- Bootstrap JS and dependencies -->
+       <!-- jQuery (latest version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Popper.js (latest version) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS (latest version) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f8f9fa;
+        }
+        .about-section {
+            padding: 60px 0;
+            background: linear-gradient(to right, #0062cb6b, #f1f1f1);
+        }
+        .about-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .about-image:hover {
+            transform: scale(1.05);
+        }
+        .about-content {
+            text-align: justify;
+            word-spacing: 3px;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-body {
+            padding: 30px;
+        }
+        .text-highlight {
+            color: #007bff;
+            font-weight: bold;
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <!-- ^^^^^^^^^^^^^^^^^^^^^^^ HEADER ^^^^^^^^^^^^^^^^^^^^^^^ -->
+    <!-- ^^^^^^^^^^^^^^^^^^^^^^^ HEADER ^^^^^^^^^^^^^^^^^^^^^^^ -->
+
+    <%- include('./common/header.ejs')%>
+
+    <!-- ^^^^^^^^^^^^^^^^^^^^^^^ HEADER ^^^^^^^^^^^^^^^^^^^^^^^ -->
+    <!-- ^^^^^^^^^^^^^^^^^^^^^^^ HEADER ^^^^^^^^^^^^^^^^^^^^^^^ -->
+
+    <div class="container-fluid about-section">
+        <div class="row mt-5 justify-content-center">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-center mb-4">About Us</h2>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="./images/adminImg.jpg" class="about-image rounded" alt="Mithilesh Tiwari">
+                            </div>
+                            <div class="col-md-8">
+                                <p class="about-content">
+                                    <span class="text-highlight">Mithilesh Tiwari</span> is the founder of Ideal Arts Mantra. He has multidimensional experiences in the field of education and motivation. He is also an organized professional with proven teaching, guidance, and counseling skills. Possesses a strong track record in improving test scores and teaching effectively. He is very skilled at communicating complex concepts in a simple and entertaining manner. He is a person who helps students to acquire knowledge, competence, and virtue. He always loves to educate, encourage, and inspire students in all aspects of their lives. Feel free to contact him with any inquiries or suggestions at the address given in the footer.
+                                </p>
+                                <div class="text-center mt-4">
+                                    <a href="/contact" class="btn btn-primary">Contact Us</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ^^^^^^^^^^^^^^^^^^^^^^ FOOTER ^^^^^^^^^^^^^^^^^^^^^^^^ -->
+    <!-- ^^^^^^^^^^^^^^^^^^^^^^ FOOTER ^^^^^^^^^^^^^^^^^^^^^^^^ -->
+
+    <%- include('./common/footer.ejs')%>
+
+    <!-- ^^^^^^^^^^^^^^^^^^^^^^ FOOTER ^^^^^^^^^^^^^^^^^^^^^^^^ -->
+    <!-- ^^^^^^^^^^^^^^^^^^^^^^ FOOTER ^^^^^^^^^^^^^^^^^^^^^^^^ -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

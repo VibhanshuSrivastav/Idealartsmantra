@@ -1,0 +1,26 @@
+.inputStyle{
+    width:500px;
+    height:35px;
+    padding:5px ;
+    border: 0px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5); 
+    border-radius:6px;
+}
+
+.formStyle{
+    /* background-color: rgba(0, 0, 255, 0.2); */
+    backdrop-filter: blur(10px);
+    background-image: linear-gradient(to right, rgba(0, 43, 255, 0.6), rgba(16, 17, 16,0.2)),url("../images/admissionFormBg.jpg");
+}
+
+
+
+.submitStyle{
+    color: white;
+    background-color: rgba(0, 0, 255, 0.498);
+    border: 0px; 
+    height:35px;
+    padding: 5px;
+    border-radius:5px ;
+
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7f6;
+        }
+        .book-card {
+            margin: 20px 0;
+            border: none;
+            border-radius: 15px;
+            padding: 20px;
+            background: linear-gradient(145deg, #ffffff, #e6e6e6);
+            box-shadow:  20px 20px 60px #d9d9d9,
+                         -20px -20px 60px #ffffff;
+            transition: transform 0.3s;
+        }
+        .book-card:hover {
+            transform: translateY(-10px);
+        }
+        .book-card h4 {
+            margin-bottom: 10px;
+            color: #343a40;
+            font-weight: bold;
+        }
+        .book-card hr {
+            border-top: 2px solid #007bff;
+        }
+        .book-card img {
+            margin-bottom: 15px;
+            border-radius: 10px;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            object-position: center;
+        }
+        .book-card p {
+            font-size: 1.1rem;
+            color: #495057;
+        }
+        .no-books {
+            font-size: 1.5rem;
+            color: #6c757d;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <%- include('./common/header.ejs') %>
+    <div class="container mt-5 pt-5">
+        <div class="row justify-content-center">
+            <% if (bookData.length > 0) { %>
+                <% bookData.forEach(book => { %>
+                    <div class="col-md-8 book-card">
+                        <h4><span class="text-dark">Class: </span><%= book.class %></h4>
+                        <h4><span class="text-dark">Subject: </span><%= book.subject %></h4>
+                        <h1 class="text-center text-success fw-bold"><%= book.topicHeading %></h2>
+                        <hr>
+                        <a href="./uploads/books/<%= book.topicImg %>">
+                        <img src="./uploads/books/<%= book.topicImg %>" alt="<%= book.topicHeading %>" class="img-fluid">
+                    </a>
+                        <p><%= book.topicExplaination %></p>
+                    </div>
+                <% }) %>
+                <div class="col-md-12 mt-4">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <% if (currentPage > 1) { %>
+                                <li class="page-item">
+                                    <a class="page-link" href="/book?page=<%= currentPage - 1 %>&class=<%= bookData[0].class %>&subject=<%= bookData[0].subject %>">Previous</a>
+                                </li>
+                            <% } %>
+                            <% for (let i = 1; i <= totalPages; i++) { %>
+                                <li class="page-item <%= currentPage === i ? 'active' : '' %>">
+                                    <a class="page-link" href="/book?page=<%= i %>&class=<%= bookData[0].class %>&subject=<%= bookData[0].subject %>"><%= i %></a>
+                                </li>
+                            <% } %>
+                            <% if (currentPage < totalPages) { %>
+                                <li class="page-item">
+                                    <a class="page-link" href="/book?page=<%= currentPage + 1 %>&class=<%= bookData[0].class %>&subject=<%= bookData[0].subject %>">Next</a>
+                                </li>
+                            <% } %>
+                        </ul>
+                    </nav>
+                </div>
+            <% } else { %>
+                <p class="no-books">No books available for the selected class and subject.</p>
+            <% } %>    
+        </div>
+    </div>
+    <%- include('./common/footer.ejs') %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

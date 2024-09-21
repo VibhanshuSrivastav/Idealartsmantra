@@ -1,0 +1,105 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.logoSize{
+    /* width:100%; */
+    height:70px;
+}
+
+.font{
+    font-size: 16px;
+    font-weight:600;
+    /* text-align:center; */
+}
+
+
+
+.nav-link:hover{
+    color: blue;
+}
+
+.nav-link.active{
+    color: blue !important;
+}
+
+.navbar-nav{
+    margin-left: 50px;
+}
+
+.navColor{
+    background-color:rgba(255, 255, 255, 0.598);
+    transition: all 1.5s ease;
+}
+
+.navColor.active{
+    background-color: rgb(232, 238, 255);
+}
+
+/* .navbar-collapse{
+    background-color: rgba(236, 150, 150, 0.598);
+} */
+.navbar{
+    height:80px;
+}
+
+.bg{
+    background-color:blue;
+    color: white;
+}
+
+.logoFont{
+        font-family: "Madimi One", sans-serif;
+}
+
+
+.carouselHeight{
+    height: 100vh;
+    /* color:blue; */
+    background-color:grey;
+}
+
+
+.joinBtn{
+    background-color: blue;
+    color: white;
+    width:250px;
+    height:60px;
+    line-height:45px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.toppersColumn{
+    position: relative
+}
+
+.topperLabel{
+    font-size: 19px;
+    font-weight: 700;
+    background-color: rgba(255, 255, 0, 0.63);
+    border-radius:50%;
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+}
+
+.classSticker{
+    text-align: center;
+    width:100%;
+    height:40px;
+    line-height:40px;
+    color:white;
+    font-weight: 700;
+    position: absolute;
+    top:0;
+    left: 0;
+    background-color: rgba(166, 152, 0, 0.788);
+    /* border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px; */
+}
+
+
+
+

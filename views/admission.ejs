@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Register for our courses with our easy-to-use registration form.">
+    <meta property="og:title" content="Registration Form">
+    <meta property="og:description" content="Register for our courses with our easy-to-use registration form.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourwebsite.com/registration">
+    <meta property="og:image" content="https://yourwebsite.com/images/registration.jpg">
+    <title>Registration Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assests/admission.css">
+    <style>
+        .eyePos {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 30%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+        }
+
+        #passwordMatchMessage {
+            display: none;
+            color: red;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <%- include('./common/header.ejs') %>
+
+    <div class="container p-5 mb-5">
+        <div class="row mt-5">
+            <form action="/admission" method="post" enctype="multipart/form-data" class="p-4 formStyle" aria-labelledby="registrationFormTitle">
+                <h2 id="registrationFormTitle" class="text-center mb-4">Registration Form</h2>
+                <hr>
+
+                <div class="d-md-flex justify-content-end mt-4">
+                    <label for="sImage" class="form-label">Upload Your Image: &nbsp;</label>
+                    <input type="file" name="sImage" id="sImage" class="" aria-describedby="imageHelp">
+                    <span id="imageHelp" class="text-danger fw-bold">Image size should be less than 200kb</span>
+                </div>
+
+                <div class="d-flex justify-content-center mt-3">
+                    <input type="text" class="inputStyle" name="sName" id="sName" placeholder="Enter Student's Name" required>
+                </div>
+
+                <div class="d-flex justify-content-center mt-3">
+                    <input type="text" name="fName" class="inputStyle" id="fName" placeholder="Enter Father's Name" required>
+                </div>
+
+                <div class="d-flex justify-content-center mt-3">
+                    <input type="text" name="mName" class="inputStyle" id="mName" placeholder="Enter Mother's Name" required>
+                </div>
+
+                <div class="d-flex justify-content-center mt-3">
+                    <input type="email" name="email" class="inputStyle" id="email" placeholder="Enter Your Email Id" required>
+                </div>
+
+                <div class="d-flex justify-content-center eyePos mt-3">
+                    <input type="password" name="password" class="inputStyle password-input" id="password" placeholder="Create a Password" required>
+                    <button type="button" id="toggle-Password" class="toggle-password">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </div>
+
+                <div class="d-flex justify-content-center eyePos mt-3">
+                    <input type="password" name="cPassword" class="inputStyle password-input" id="cPassword" placeholder="Confirm Password" required>
+                    <button type="button" id="toggle-Password2" class="toggle-password">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </div>
+
+                <div class="d-flex justify-content-center eyePos">
+                    <span id="passwordMatchMessage" style="display: none; color: rgb(146, 0, 0);">Passwords do not match</span>
+                </div>
+
+                <div class="d-flex justify-content-center mt-3">
+                    <input type="tel" name="phone" class="inputStyle" id="phone" pattern="[0-9]{10}" placeholder="Enter Your mobile number" required>
+                </div>
+
+                <div class="d-flex justify-content-center mt-3">
+                    <input type="number" name="aadhar" class="inputStyle" id="aadhar" pattern="[0-9]{12}" placeholder="Enter Your Aadhar number" required>
+                </div>
+
+                <div class="d-flex justify-content-center mt-3">
+                    <select name="class" id="class" class="inputStyle text-secondary" required>
+                        <option value="" disabled selected>Select Class</option>
+                        <option value="9th">9th</option>
+                        <option value="10th">10th</option>
+                        <option value="11th">11th</option>
+                        <option value="12th">12th</option>
+                    </select>
+                </div>
+
+                <div class="d-flex justify-content-center mt-3">
+                    <select name="subject" id="subject" class="inputStyle text-secondary" multiple required>
+                        <option value="Subject" disabled selected>Select Subject</option>
+                        <option value="All" id="All">All</option>
+                        <option value="English">English</option>
+                    </select>
+                </div>
+
+                <div class="d-flex justify-content-center mt-3">
+                    <input type="submit" value="Register" class="submitStyle btn btn-primary">
+                </div>
+
+                <p class="text-center text-muted">Note: Fields marked with * are required.</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <%- include('./common/footer.ejs') %>
+
+    <script>
+        // Update subject options based on class selection
+        const classElement = document.getElementById('class');
+
+        function updateSubject() {
+            const subjectSelect = document.getElementById('subject');
+            const selectedClass = classElement.value;
+
+            subjectSelect.innerHTML = `
+                <option value="Subject" disabled>Select Subject</option>
+                <option value="All">All</option>
+                <option value="English">English</option>
+            `;
+
+            if (selectedClass === "11th" || selectedClass === "12th") {
+                subjectSelect.innerHTML += `
+                    <option value="Arts">Arts (Political, History, Geography)</option>
+                `;
+            } else {
+                subjectSelect.innerHTML += `
+                    <option value="SST">SST</option>
+                `;
+            }
+        }
+
+        classElement.addEventListener('change', updateSubject);
+        updateSubject();
+
+        // Select all subjects if "All" is selected
+        document.getElementById('subject').addEventListener('change', function(event) {
+            const subjectSelect = event.target;
+            const selectedOptions = Array.from(subjectSelect.selectedOptions);
+            const isAllSelected = selectedOptions.some(option => option.value === 'All');
+            
+            if (isAllSelected) {
+                subjectSelect.querySelectorAll('option').forEach(option => {
+                    if (option.value !== 'All' && option.value !== 'Subject') {
+                        option.selected = true;
+                    } else {
+                        option.selected = false;
+                    }
+                });
+            }
+        });
+
+        // Toggle password visibility
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', function () {
+                const passwordInput = this.previousElementSibling;
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.querySelector('i').classList.toggle('fa-eye-slash');
+            });
+        });
+
+        // Validate passwords
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('cPassword');
+            const passwordMatchMessage = document.getElementById('passwordMatchMessage');
+            const submitBtn = document.querySelector('input[type="submit"]');
+
+            function validatePasswords() {
+                if (passwordInput.value !== confirmPasswordInput.value) {
+                    passwordMatchMessage.style.display = 'block';
+                    submitBtn.disabled = true;
+                } else {
+                    passwordMatchMessage.style.display = 'none';
+                    submitBtn.disabled = false;
+                }
+            }
+
+            passwordInput.addEventListener('input', validatePasswords);
+            confirmPasswordInput.addEventListener('input', validatePasswords);
+        });
+    </script>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+

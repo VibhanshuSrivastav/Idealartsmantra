@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="./assets/admission.css">
+    <style>
+        .card {
+            box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.582);
+        }
+    </style>
+</head>
+<body>
+    <%- include('./common/header.ejs') %>
+
+    <div class="container pt-5 mb-5">
+        <div class="row py-4 mt-5 bg-primary-subtle">
+            <h2 class="text-center mt-4">User Profile</h2>
+            <div class="col-12 d-flex justify-content-center mb-4">
+                <hr class="w-25 border border-black border-5">
+            </div>
+
+            <div class="col-md-4">
+                <div class="card mt-3 rounded-4" style="background-color:rgba(68, 67, 67, 0.164);backdrop-filter:blur(50px) brightness(0.9);">
+                    <% if (user && user.sImage) { %>
+                        <img src="./uploads/students/<%= user.sImage %>" alt="" class="object-fit-contain" style="height:300px;">
+                    <% } else { %>
+                        <img src="./uploads/students/default.png" alt="Default Image" class="object-fit-contain" style="height:300px;">
+                    <% } %>
+                    <div class="card-body text-center">
+                        <% if (user) { %>
+                            <h3 class="card-title"><%= user.sName %></h3>
+                            <p class="card-text fs-5 bg-white">
+                                <span class="fw-bold text-primary"> Class - </span><%= user.class %>
+                            </p>
+                            <p class="card-text fs-5 bg-white">
+                                <span class="fw-bold text-primary"> Roll No. - </span><%= user.rollNo %>
+                            </p>
+                            <p class="card-text fs-5 bg-white">
+                                <span class="fw-bold text-primary"> Subjects - </span><%= user.subject.join(', ') %>
+                            </p>
+                            <p class="card-text fs-5 bg-white">
+                                <span class="fw-bold text-primary"> Phone - </span><%= user.phone %>
+                            </p>
+                            <p class="card-text fs-5 bg-white">
+                                <span class="fw-bold text-primary"> Email - </span><%= user.email %>
+                            </p>
+                        <% } else { %>
+                            <p class="text-center">User information is not available.</p>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="container">
+                    <div class="row">
+                        <% user.subject.forEach((subject, index) => { %>
+                            <div class="col-md-4 card p-3 mt-3">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title">Class <%= user.class %> Notes</h4>
+                                    <p class="card-text">
+                                        <button class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#Sst<%= user.class %>" id="<%= user.rollNo %><%= subject %>" disabled>
+                                            <a href="/notes?class=<%= user.class%>&subject=<%= subject %>"
+                                                class="text-decoration-none text-white">
+                                                <%= subject %>
+                                            </a>
+                                        </button>
+                                    </p>
+                                </div>
+                            </div>
+                        <% }) %>
+                        <% user.subject.forEach((subject, index) => { %>
+                            <div class="col-md-4 card p-3 mt-3">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title">Class <%= user.class %> Book</h4>
+                                    <p class="card-text">
+                                        <a href="/book?class=<%= user.class %>&subject=<%= subject %>" class="text-decoration-none btn btn-primary fw-bold">
+                                            <%= subject %>
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        <% }) %>
+                        
+                        <div class="col-md-4 card p-3 mt-3">
+                            <div class="card-body text-center">
+                                <h4 class="card-title">Quiz</h4>
+                                <p class="card-text">
+                                    <a href="/test/<%= user.class %>" class="btn btn-warning fw-bold">Test Yourself</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 my-4 text-center">
+            <a href="/userLogout" class="btn w-50 btn-danger">Logout</a>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <%- include('./common/footer.ejs') %>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    <% user.subject.forEach((subject) => { %>
+        // Check for English
+        if ('<%= subject %>' === 'English' && <%= user.englishNotesEnabled %>) {
+            document.getElementById('<%= user.rollNo %>English').removeAttribute('disabled');
+        }
+        // Check for SST
+        if ('<%= subject %>' === 'SST' && <%= user.englishNotesEnabled %>) {
+            document.getElementById('<%= user.rollNo %>SST').removeAttribute('disabled');
+        }
+
+        if ('<%= subject %>' === 'Political' && <%= user.englishNotesEnabled %>) {
+            document.getElementById('<%= user.rollNo %>Political').removeAttribute('disabled');
+        }
+
+        if ('<%= subject %>' === 'History' && <%= user.englishNotesEnabled %>) {
+            document.getElementById('<%= user.rollNo %>History').removeAttribute('disabled');
+        }
+
+        if ('<%= subject %>' === 'Geography' && <%= user.englishNotesEnabled %>) {
+            document.getElementById('<%= user.rollNo %>Geography').removeAttribute('disabled');
+        }
+        
+    <% }) %>
+});
+
+    </script>
+</body>
+</html>

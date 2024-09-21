@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Page</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <%- include('./common/header.ejs') %>
+
+  <div class="container pt-5 pb-5 mt-5">
+    <div class="row">
+      <% if (typeof errorMessage !== 'undefined') { %>
+        <div class="alert alert-danger" role="alert">
+          <%= errorMessage %>
+        </div>
+      <% } %>
+
+      <h1 class="text-center text-success">Test Yourself</h1>
+      <hr>
+
+      <% if (questionData.length > 0) { %>
+        <div class="col-md-12">
+          <!-- Tab navigation -->
+          <ul class="nav nav-tabs my-3" id="myTab" role="tablist">
+            <% const groupedQuestions = {}; %>
+            <% questionData.forEach((question) => { %>
+              <% if (!groupedQuestions[question.subject]) { %>
+                <% groupedQuestions[question.subject] = []; %>
+              <% } %>
+              <% groupedQuestions[question.subject].push(question); %>
+            <% }); %>
+
+            <% Object.keys(groupedQuestions).forEach((subject, tabIndex) => { %>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link<%= tabIndex === 0 ? ' active' : '' %>" id="tab<%= tabIndex %>-tab" data-bs-toggle="tab" data-bs-target="#tab<%= tabIndex %>" type="button" role="tab" aria-controls="tab<%= tabIndex %>" aria-selected="<%= tabIndex === 0 %>"><%= subject %></button>
+              </li>
+            <% }); %>
+          </ul>
+
+          <div class="tab-content" id="myTabContent">
+            <% Object.keys(groupedQuestions).forEach((subject, tabIndex) => { %>
+              <div class="tab-pane fade<%= tabIndex === 0 ? ' show active' : '' %>" id="tab<%= tabIndex %>" role="tabpanel" aria-labelledby="tab<%= tabIndex %>-tab">
+                <h2 class="text-primary"><%= subject %></h2>
+                <form action="/submitTest/<%= questionData[0].class %>?subject=<%= subject %>" method="POST">
+                  <% groupedQuestions[subject].forEach((question, index) => { %>
+                    <div class="mb-4 p-3 border rounded">
+                      <h5><%= question.class %> - <%= question.subject %></h5>
+                      <p><%= question.question %></p>
+                      <ul class="list-unstyled">
+                        <li>A: <%= question.options.a %></li>
+                        <li>B: <%= question.options.b %></li>
+                        <li>C: <%= question.options.c %></li>
+                        <li>D: <%= question.options.d %></li>
+                      </ul>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="answers[<%= question._id %>]" value="a" id="answerA<%= index %>">
+                        <label class="form-check-label" for="answerA<%= index %>">A</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="answers[<%= question._id %>]" value="b" id="answerB<%= index %>">
+                        <label class="form-check-label" for="answerB<%= index %>">B</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="answers[<%= question._id %>]" value="c" id="answerC<%= index %>">
+                        <label class="form-check-label" for="answerC<%= index %>">C</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="answers[<%= question._id %>]" value="d" id="answerD<%= index %>">
+                        <label class="form-check-label" for="answerD<%= index %>">D</label>
+                      </div>
+                    </div>
+                  <% }); %>
+                  <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                </form>
+              </div>
+            <% }); %>
+          </div>
+        </div>
+      <% } else { %>
+        <div class="col-md-12">
+          <p class="text-danger">Questions not found</p>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+  <%- include('./common/footer.ejs') %>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+</body>
+
+</html>

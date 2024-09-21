@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .card {
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+        .container-fluid {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <%- include('./common/header.ejs') %>
+
+    <div class="container-fluid mt-5">
+        <h2 class="text-center mt-3">Notes</h2>
+        <div class="row pt-5">
+            <% notesData.forEach(note => { %>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Class <%= note.class %></h5>
+                            <p class="card-text">Subject: <%= note.subject %></p>
+                            <a href="../uploads/notes/<%= note.notes %>" target="_blank" class="btn btn-primary">View Notes</a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+
+    <%- include('./common/footer.ejs') %>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
